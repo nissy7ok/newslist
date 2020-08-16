@@ -5,29 +5,30 @@
 
 <h1>ニュース一覧</h1>
 <h3>一覧表示</h3>
-<table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>タイトル</th>
-            <th>日付</th>
-            <th>内容</th>
-            <th>保存</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for article in articles %}
-        <tr>
-          <td>{{ article.title }}</td>
-          <td>{{ article.created_at }}</td>
-          <td>{{ article.content }}</td>
-          <td>{{ article.check }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% for article in articles %}
+<!-- 
+<div class="media">
+  <svg class="bd-placeholder-img align-self-center mr-3" width="64" height="64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 64x64"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">64x64</text></svg>
+  <div class="media-body">
+    <h5 class="mt-0 mb-0">{{ article.title }}</h5>
+    <p class="mb-0 small">{{ article.created_at }}</p>
+    <p class="mb-0">{{ article.content }}</p>
+    <p class="mb-0 text-right small">{{ article.check }}</p>
+  </div>
+</div> -->
 
-{% endfor %}
 
+<ul class="list-unstyled">
+  {% for article in articles %}
+  <li class="media">
+    <svg class="bd-placeholder-img mr-3 rounded" width="64" height="64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 64x64"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">64x64</text></svg>
+    <div class="media-body">
+      <h5 class="mt-0 mb-0">{{ article.title }}</h5>
+      <p class="mb-0 small">{{ article.created_at }}</p>
+      <p class="mb-0">{{ article.content }}</p>
+      <p class="mb-0 text-right small">{{ article.check }}</p>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
 
 {% endblock content %}
