@@ -5,7 +5,7 @@
 <br>
 <h1>ニュース一覧</h1>
 
-<ul class="list-unstyled">
+<ul class="list-unstyled mt-5">
   {% for article in articles %}
   <li class="media">
     <svg class="bd-placeholder-img mr-3 rounded" width="64" height="64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 64x64"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">64x64</text></svg>
@@ -13,10 +13,10 @@
       <h5 class="mt-0 mb-0">{{ article.title }}</h5>
       <p class="mb-0 small">{{ article.created_at }}</p>
       <p class="mb-0">{{ article.content }}</p>
-      <div class="btn-group-toggle" data-toggle="buttons">
-        <button type="button" class="btn btn-secondary float-right btn-sm" data-toggle="button" aria-pressed="false" autocomplete="off">
-          {{ article.check }}
-        </button>
+      <div class="btn-group-toggle float-right btn-sm" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="checkbox" checked autocomplete="off">{{ article.check }}
+        </label>
       </div>
     </div>
   </li>
