@@ -13,7 +13,11 @@
       <h5 class="mt-0 mb-0">{{ article.title }}</h5>
       <p class="mb-0 small">{{ article.created_at }}</p>
       <p class="mb-0">{{ article.content }}</p>
-      <p class="mb-0 text-right small">{{ article.check }}</p>
+      <div class="btn-group-toggle" data-toggle="buttons">
+        <button type="button" class="btn btn-secondary float-right btn-sm" data-toggle="button" aria-pressed="false" autocomplete="off">
+          {{ article.check }}
+        </button>
+      </div>
     </div>
   </li>
   {% endfor %}
