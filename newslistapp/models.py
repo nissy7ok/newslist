@@ -5,6 +5,8 @@ class Article(models.Model):
     title = models.CharField(max_length=100)
     content = models.CharField(max_length=255)
     check = models.BooleanField(default = False)
+    url = models.URLField(max_length=200)
+    name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
