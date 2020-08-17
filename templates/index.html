@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3 class='border-bottom border-gray pt-5 pb-2'>ニュース一覧</h3>
+
+<ul class="list-unstyled">
+  {% for title, date, url in news_list %}
+  <li class="media border-bottom border-gray pt-3 pb-1">
+    <img src="{{ favicon }}"  class="img-thumbnail">
+    <div class="media-body pl-3">
+      <a href="#" class="">
+        <h6 class="mt-0 mb-0 text-body">{{ title|truncatewords_html:10 }}</h5>
+          <span class="mb-0 small text-secondary">{{ target }}</span>
+          <span class="mb-0 small text-secondary pl-2 pr-5">{{ date }}</span>
+        <span class="mb-0 small text-secondary">{{ url }}</span>
+      </a>
+        <p class="mb-0 text-body">{{ article.content|truncatewords_html:100 }}</p>
+      <div class="btn-group-toggle float-right" data-toggle="buttons">
+        <label class="btn btn-secondary btn-sm">
+          <input type="checkbox" checked autocomplete="off">STOCK
+        </label>
+      </div>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+
+{% endblock content %}

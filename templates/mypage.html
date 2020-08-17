@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3 class='border-bottom border-gray mt-5'>ニュース一覧</h3>
+
+<ul class="list-unstyled">
+  {% for article in articles %}
+  <li class="media border-bottom border-gray pt-3 pb-3">
+    <svg class="bd-placeholder-img mr-3 rounded" width="64" height="64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 64x64"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">64x64</text></svg>
+    <div class="media-body">
+      <a href="#">
+        <h5 class="mt-0 mb-0">{{ article.title|truncatewords_html:10 }}</h5>
+        <span class="mb-0 small">{{ article.created_at }}</span>
+        <span class="mb-0 small">{{ article.url }}</span>
+        <span class="mb-0 small">{{ article.name }}</span>
+        <p class="mb-0">{{ article.content|truncatewords_html:100 }}</p>
+      </a>
+      <div class="btn-group-toggle float-right" data-toggle="buttons">
+        <label class="btn btn-secondary btn-sm">
+          <input type="checkbox" checked autocomplete="off">{{ article.check }}
+        </label>
+      </div>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+
+{% endblock content %}
