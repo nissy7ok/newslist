@@ -8,6 +8,7 @@ from .models import Article
 import re
 import requests
 from bs4 import BeautifulSoup
+from datetime import datetime as dt
 
 def index(request):
     articles = Article.objects.all()
@@ -21,6 +22,7 @@ def index(request):
     for elem in elems:
         title = elem.h3.string
         date = elem.time.string
+        date = dt.strptime(date, '%Y.%m.%d').date()
         path = elem.attrs["href"]
         url = "https://r25.jp" + path
         news_list.append([title, date, url])
