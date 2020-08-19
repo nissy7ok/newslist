@@ -2,25 +2,31 @@
 
 {% block content %}
 
-<h3 class='border-bottom border-gray mt-5'>ニュース一覧</h3>
+<h3 class='border-bottom border-gray pt-5 pb-2'>保存したニュース一覧</h3>
 
 <ul class="list-unstyled">
   {% for article in articles %}
-  <li class="media border-bottom border-gray pt-3 pb-3">
-    <svg class="bd-placeholder-img mr-3 rounded" width="64" height="64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 64x64"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">64x64</text></svg>
-    <div class="media-body">
-      <a href="#">
-        <h5 class="mt-0 mb-0">{{ article.title|truncatewords_html:10 }}</h5>
-        <span class="mb-0 small">{{ article.created_at }}</span>
-        <span class="mb-0 small">{{ article.url }}</span>
-        <span class="mb-0 small">{{ article.name }}</span>
-        <p class="mb-0">{{ article.content|truncatewords_html:100 }}</p>
+  <li class="media border-bottom border-gray pt-3 pb-1">
+    <svg class="bd-placeholder-img mr-3" width="64" height="64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 64x64"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">{{ icon }}</text></svg>
+    <div class="media-body pl-3">
+      <a href="{{ article.url }}" class="">
+        <h6 class="mt-0 mb-0 text-body">{{ article.title|truncatewords_html:10 }}</h5>
+          <span class="mb-0 small text-secondary">{{ article.name }}</span>
+          <span class="mb-0 small text-secondary pl-2 pr-2">{{ article.created_at }}</span>
+        <span class="mb-0 small text-secondary">{{ article.url }}</span>
       </a>
-      <div class="btn-group-toggle float-right" data-toggle="buttons">
+      <!-- <div class="btn-group-toggle float-right" data-toggle="buttons">
         <label class="btn btn-secondary btn-sm">
-          <input type="checkbox" checked autocomplete="off">{{ article.check }}
+          <input type="checkbox" checked autocomplete="off">STOCK
         </label>
       </div>
+             -->
+      <form action="stock/" method="post">{% csrf_token %}
+        <input type="hidden" name="title" value="{{ title }}">
+        <input type="hidden" name="name" value="{{ target }}">
+        <input type="hidden" name="url" value="{{ url }}">
+        <input type="submit" value="delete" class="float-right btn btn-secondary btn-sm" data-toggle="buttons">
+      </form>
     </div>
   </li>
   {% endfor %}

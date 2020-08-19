@@ -15,12 +15,19 @@
           <span class="mb-0 small text-secondary pl-2 pr-2">{{ date }}</span>
         <span class="mb-0 small text-secondary">{{ url }}</span>
       </a>
-        <p class="mb-0 text-body">{{ article.content|truncatewords_html:100 }}</p>
+        <!-- <p class="mb-0 text-body">{{ article.content|truncatewords_html:100 }}</p>
       <div class="btn-group-toggle float-right" data-toggle="buttons">
         <label class="btn btn-secondary btn-sm">
           <input type="checkbox" checked autocomplete="off">STOCK
         </label>
       </div>
+       -->
+      <form action="stock/" method="post">{% csrf_token %}
+        <input type="hidden" name="title" value="{{ title }}">
+        <input type="hidden" name="name" value="{{ target }}">
+        <input type="hidden" name="url" value="{{ url }}">
+        <input type="submit" value="stock" class="float-right btn btn-secondary btn-sm" data-toggle="buttons">
+      </form>
     </div>
   </li>
   {% endfor %}

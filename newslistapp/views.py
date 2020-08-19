@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
 
 from django.contrib.auth.models import User
 from .models import Article
@@ -55,6 +57,12 @@ def index(request):
     return render(request, 'index.html', {'news_list': news_list, 'articles': articles})
 
 def mypage(request):
-    articles = Article.objects.all()
+    articles = Article.objects.all().order_by('-created_at')
     return render(request, 'mypage.html', {'articles': articles})
     # user_idでページを分ける
+
+class StockNews(CreateView):
+    template_name = 'index.html'
+    model = Article
+    fields = ('title', 'name', 'url')
+    success_url = reverse_lazy('newslistapp:index')
