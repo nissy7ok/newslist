@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.views.generic import CreateView
+from django.views.decorators.http import require_POST
 from django.urls import reverse_lazy
 
 from django.contrib.auth.models import User
@@ -66,3 +67,9 @@ class StockNews(CreateView):
     model = Article
     fields = ('title', 'name', 'url')
     success_url = reverse_lazy('newslistapp:index')
+
+@require_POST
+def delete_stock(request, pk):
+    stock = get_object_or_404(Article, pk=pk)
+    stock.delete()
+    return redirect('newslistapp:mypage')

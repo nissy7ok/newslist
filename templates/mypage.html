@@ -21,11 +21,8 @@
         </label>
       </div>
              -->
-      <form action="stock/" method="post">{% csrf_token %}
-        <input type="hidden" name="title" value="{{ title }}">
-        <input type="hidden" name="name" value="{{ target }}">
-        <input type="hidden" name="url" value="{{ url }}">
-        <input type="submit" value="delete" class="float-right btn btn-secondary btn-sm" data-toggle="buttons">
+      <form action="{% url 'newslistapp:delete_stock' pk=article.pk %}" method="post">{% csrf_token %}
+        <button type="submit" class="float-right btn btn-secondary btn-sm" onclick='return confirm("本当に削除しますか？");''>delete</button>
       </form>
     </div>
   </li>
