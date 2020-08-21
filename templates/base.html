@@ -22,7 +22,19 @@
           <img src="#" width="30" height="30" class="d-inline-block align-top" alt="">
           NewsListApp
         </a>
-        <a href="{% url 'newslistapp:mypage' %}"><button class="btn btn-outline-info my-2 my-sm-0" type="submit">MyPage</button></a>
+        <ul class='navbar-nav list-group-horizontal ml-auto pr-3'>
+          {% if user.is_authenticated %}
+              <li class='nav-time'>
+                  <span class='navbar-text'>{{ user }} - </span>
+              </li>
+              <li class='nav-item'>
+                  <a href='{% url "logout" %}' class='logout nav-link'>Logout</a>
+              </li>
+          {% else %}
+              <a href='{% url "login" %}' class='login nav-link'>Login</a>
+          {% endif %}
+        </ul>
+        <a href="{% url 'newslistapp:mypage' %}"><button class="btn btn-outline-info my-sm-0" type="submit">MyPage</button></a>
       </div>
     </nav>
     

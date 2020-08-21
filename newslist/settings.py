@@ -33,8 +33,8 @@ ALLOWED_HOSTS = []
 AUTH_USER_MODEL = 'users.User'
 
 INSTALLED_APPS = [
-    'newslistapp.apps.NewslistappConfig',
-    'users.apps.UsersConfig',
+    'newslistapp',
+    'users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -73,6 +73,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'newslist.wsgi.application'
 
+LOGIN_REDIRECT_URL = '/'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
