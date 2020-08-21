@@ -19,8 +19,9 @@
     <nav class="navbar navbar-dark bg-dark sticky-top">
       <div class="container">
         <a class="navbar-brand" href="{% url 'newslistapp:index' %}">
-          <img src="#" width="30" height="30" class="d-inline-block align-top" alt="">
-          NewsListApp
+          {% load static %}
+          <img src="{% static 'logo.png' %}" width="160px" height="32px" class="d-inline-block align-top img-fluid" alt="ScrapeNews">
+          <!-- NewsListApp -->
         </a>
         <ul class='navbar-nav list-group-horizontal ml-auto pr-3'>
           {% if user.is_authenticated %}
@@ -40,7 +41,7 @@
     
     <!-- メイン -->
     <div class="bg-light">
-      <div class="container">
+      <div class="container vh-100">
         
         {% block content %}
           

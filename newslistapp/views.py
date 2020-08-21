@@ -56,6 +56,25 @@ def index(request):
         url = elem.a.attrs["href"]
         news_list.append([target, icon, title, date, url])
 
+    # MarkeZine
+    url3 = 'https://markezine.jp/'
+    res3 = requests.get(url3)
+    soup3 = BeautifulSoup(res3.text, "html.parser")
+    elems3 = soup3.find_all(class_='new')
+
+    for elem in elems3:
+        target = 'MarkeZine'
+        icon = 'M'
+        title = elem.a.text.strip()
+        date = elem.a.text.strip()
+        date = dt.strptime(date[-7:], '（%m/%d）')
+        year_n = dt.now().year
+        date = str(year_n) + date.strftime('%m%d')
+        date = dt.strptime(date, '%Y%m%d').date()
+        path = elem.a.attrs["href"]
+        url = "https://markezine.jp/" + path
+        news_list.append([target, icon, title, date, url])
+
     news_list = sorted(news_list, key=lambda x: x[3], reverse=True)
     return render(request, 'index.html', {'news_list': news_list, 'articles': articles})
 
