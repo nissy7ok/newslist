@@ -79,7 +79,7 @@ def index(request):
     return render(request, 'index.html', {'news_list': news_list, 'articles': articles})
 
 def mypage(request):
-    articles = Article.objects.order_by('-created_at')
+    articles = Article.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'mypage.html', {'articles': articles})
     # user_idでページを分ける
 
