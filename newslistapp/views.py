@@ -95,7 +95,7 @@ class StockNews(CreateView, LoginRequiredMixin):
         return super().form_valid(form)
     def form_invalid(self, form):
         messages.warning(self.request, "記事は既に保存されています")
-        return self.render_to_response(self.get_context_data(form=form))
+        return redirect('newslistapp:index')
 
 @login_required
 @require_POST
