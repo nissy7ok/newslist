@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.core.mail import send_mail
 from django.contrib.auth.base_user import BaseUserManager
+from newslistapp.models import *
 # import sys
 # sys.path.append('../')
 # from newslistapp.models import *

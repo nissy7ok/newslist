@@ -86,7 +86,7 @@ def mypage(request):
 class StockNews(CreateView):
     template_name = 'index.html'
     model = Article
-    fields = ('title', 'name', 'url')
+    fields = ('user', 'title', 'name', 'url')
     success_url = reverse_lazy('newslistapp:index')
     # success_message = "保存しました"
 
