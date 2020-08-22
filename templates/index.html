@@ -27,13 +27,16 @@
             <span class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</span>
         {% endfor %}
       {% endif %}
-      <form action="stock/" method="post">{% csrf_token %}
-        <input type="hidden" name="user" value="{{ user.id }}">
-        <input type="hidden" name="title" value="{{ title }}">
-        <input type="hidden" name="name" value="{{ target }}">
-        <input type="hidden" name="url" value="{{ url }}">
-        <input type="submit" value="stock" class="float-right btn btn-secondary btn-sm" data-toggle="buttons">
-      </form>
+
+      {% if user.is_authenticated %}
+        <form action="stock/" method="post">{% csrf_token %}
+          <input type="hidden" name="user" value="{{ user.id }}">
+          <input type="hidden" name="title" value="{{ title }}">
+          <input type="hidden" name="name" value="{{ target }}">
+          <input type="hidden" name="url" value="{{ url }}">
+          <input type="submit" value="stock" class="float-right btn btn-secondary btn-sm" data-toggle="buttons">
+        </form>
+      {% endif %}
     </div>
   </li>
   {% endfor %}
