@@ -3,8 +3,31 @@
 {% block content %}
   <div class='vh-100'>
     <h1>Sign up</h1>
+    <!-- <form action="{% url 'users:signup' %}"method='post'>{% csrf_token %}
+      <div class="form-group">
+        <label for="exampleInputEmail1">ユーザー名：</label><br>
+        {{ signup_form.username }}
+        <small id="emailHelp" class="form-text text-muted"></small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password：</label><br>
+        {{ signup_form.password }}
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password：</label><br>
+        {{ signup_form.password1 }}
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password(確認用)：</label><br>
+        {{ signup_form.password2 }}
+      </div>
+      <button type="submit" class="btn btn-primary">Sign up</button>
+    </form>
+     -->
+
+
     <section class='common-form'>
-      <form action="{% url 'accounts:signup' %}"method='post'>{% csrf_token %}
+      <form action="{% url 'users:signup' %}"method='post'>{% csrf_token %}
         {{ signup_form.as_p }}
           {% for error in signup_form.username.errors %}
             <span class="text-warning">{{ error }}</span>

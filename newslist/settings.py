@@ -33,9 +33,8 @@ ALLOWED_HOSTS = []
 AUTH_USER_MODEL = 'users.User'
 
 INSTALLED_APPS = [
-    'newslistapp',
-    'users',
-    'accounts',
+    'newslistapp.apps.NewslistappConfig',
+    'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
