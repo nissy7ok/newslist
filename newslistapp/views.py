@@ -5,6 +5,8 @@ from django.views.decorators.http import require_POST
 from django.urls import reverse_lazy
 from django.contrib import messages
 # from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.models import User
 from .models import Article
@@ -16,7 +18,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime as dt
 
 def index(request):
-    articles = Article.objects.all()    # 保存用DB、まだ使わない
+    articles = Article.objects.all()
     
     targets = ['新R25', 'AVILEN AI Trend']
     urls = {
@@ -78,18 +80,19 @@ def index(request):
     news_list = sorted(news_list, key=lambda x: x[3], reverse=True)
     return render(request, 'index.html', {'news_list': news_list, 'articles': articles})
 
+@login_required
 def mypage(request):
     articles = Article.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'mypage.html', {'articles': articles})
-    # user_idでページを分ける
 
-class StockNews(CreateView):
+class StockNews(CreateView, LoginRequiredMixin):
     template_name = 'index.html'
     model = Article
     fields = ('user', 'title', 'name', 'url')
     success_url = reverse_lazy('newslistapp:index')
     # success_message = "保存しました"
 
+@login_required
 @require_POST
 def delete_stock(request, pk):
     stock = get_object_or_404(Article, pk=pk)

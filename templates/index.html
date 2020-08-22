@@ -28,7 +28,7 @@
         {% endfor %}
       {% endif %}
       <form action="stock/" method="post">{% csrf_token %}
-        <input type="" name="user" value="{{ user.id }}">
+        <input type="hidden" name="user" value="{{ user.id }}">
         <input type="hidden" name="title" value="{{ title }}">
         <input type="hidden" name="name" value="{{ target }}">
         <input type="hidden" name="url" value="{{ url }}">
