@@ -22,11 +22,6 @@
         </label>
       </div>
       -->
-      {% if messages %}
-        {% for message in messages %}
-            <span class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</span>
-        {% endfor %}
-      {% endif %}
 
       {% if user.is_authenticated %}
         <form action="stock/" method="post">{% csrf_token %}

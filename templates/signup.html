@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class='vh-100'>
+    <h1>Sign up</h1>
+    <section class='common-form'>
+      <form action="{% url 'accounts:signup' %}"method='post'>{% csrf_token %}
+        {{ signup_form.as_p }}
+          {% for error in signup_form.username.errors %}
+            <span class="text-warning">{{ error }}</span>
+          {% endfor %}
+        <button type='submit'>Sign up</button>
+      </form>
+    </section>
+  </div>
+{% endblock %}
