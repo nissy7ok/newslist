@@ -45,14 +45,19 @@
     
     <!-- メイン -->
     <div class="bg-light">
-      <div class="container v-100">
-        
-        {% block content %}
+      <div class="container h-100">
+        <div class='pt-3'>
           {% if messages %}
             {% for message in messages %}
-                <span class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</span>
+                <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">{{ message }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
             {% endfor %}
           {% endif %}
+        </div>
+        {% block content %}
           
         {% endblock content %}
         

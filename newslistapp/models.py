@@ -14,7 +14,7 @@ class Article(models.Model):
             },
     )
     url = models.URLField(max_length=200, unique=True)
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
     user = models.ForeignKey('users.User', verbose_name='ユーザー名', on_delete=models.CASCADE)
 
     def __str__(self):
