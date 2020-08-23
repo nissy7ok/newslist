@@ -89,7 +89,7 @@ def index(request):
 
 @login_required
 def mypage(request):
-    articles = Article.objects.filter(user=request.user).order_by('title', '-created_at').distinct('title')
+    articles = Article.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'mypage.html', {'articles': articles})
 
 class StockNews(CreateView, LoginRequiredMixin):
