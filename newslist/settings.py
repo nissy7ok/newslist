@@ -80,9 +80,9 @@ LOGIN_REDIRECT_URL = '/'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'newslist_development',
-        'USER': 'root',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'newslistapp_development',
+        'USER': 'nishimuranaoki',
         'PASSWORD': '',
         'HOST': '',
         'PORT': '',
