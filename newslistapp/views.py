@@ -37,7 +37,7 @@ def index(request):
 
     results = []
     for url in urls:
-        r = requests.get(url)
+        r = requests.get(url, timeout=(3.0, 7.5))
         results.append(r)
 
     # 新R25
