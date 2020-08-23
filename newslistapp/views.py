@@ -16,6 +16,8 @@ import re
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime as dt
+from concurrent.futures import ThreadPoolExecutor
+from functools import partial
 
 def index(request):
     articles = Article.objects.all()
@@ -25,16 +27,20 @@ def index(request):
         'marketing': 'm',
         'entertainment': 'e',
         'news': 'n'}
-    targets = ['新R25', 'AVILEN AI Trend']
-    urls = {
-        targets[0]: 'https://r25.jp/latest',
-        targets[1]: 'https://ai-trend.jp/'
-    }
+
+    urls = [
+        'https://r25.jp/latest',
+        'https://ai-trend.jp/',
+        'https://markezine.jp/'
+    ]
+
+    results = []
+    for url in urls:
+        r = requests.get(url)
+        results.append(r)
 
     # 新R25
-    url = 'https://r25.jp/latest'
-    res = requests.get(url)
-    soup = BeautifulSoup(res.text, "html.parser")
+    soup = BeautifulSoup(results[0].text, "html.parser")
     elems = soup.find_all(href=re.compile("/article/"))
 
     news_list = []
@@ -49,9 +55,7 @@ def index(request):
         news_list.append([target, icon, title, date, url])
 
     # AVILEN AI Trend
-    url2 = 'https://ai-trend.jp/'
-    res2 = requests.get(url2)
-    soup2 = BeautifulSoup(res2.text, "html.parser")
+    soup2 = BeautifulSoup(results[1].text, "html.parser")
     elems2 = soup2.find_all(class_='article__content')
 
     for elem in elems2:
@@ -64,9 +68,7 @@ def index(request):
         news_list.append([target, icon, title, date, url])
 
     # MarkeZine
-    url3 = 'https://markezine.jp/'
-    res3 = requests.get(url3)
-    soup3 = BeautifulSoup(res3.text, "html.parser")
+    soup3 = BeautifulSoup(results[2].text, "html.parser")
     elems3 = soup3.find_all(class_='new')
 
     for elem in elems3:
