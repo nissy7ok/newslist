@@ -21,7 +21,6 @@
         <a class="navbar-brand" href="{% url 'newslistapp:index' %}">
           {% load static %}
           <img src="{% static 'logo.png' %}" width="160px" height="32px" class="d-inline-block align-top img-fluid" alt="ScrapeNews">
-          <!-- NewsListApp -->
         </a>
         <ul class='navbar-nav list-group-horizontal ml-auto pr-3'>
           {% if user.is_authenticated %}
@@ -49,7 +48,7 @@
         <div class='pt-3'>
           {% if messages %}
             {% for message in messages %}
-                <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %} alert-dismissible fade show small" role="alert">{{ message }}
+                <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %} alert-dismissible fade show small position-absolute w-50 top-1" style="left:50%; transform: translate(-50%, 0%)" role="alert">{{ message }}
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
