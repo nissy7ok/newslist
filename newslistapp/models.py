@@ -17,6 +17,11 @@ class Article(models.Model):
     icon = models.CharField(max_length=10)
     user = models.ForeignKey('users.User', verbose_name='ユーザー名', on_delete=models.CASCADE)
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['name', 'user'], name='unique_booking'),
+        ]
+
     def __str__(self):
         return self.title
 

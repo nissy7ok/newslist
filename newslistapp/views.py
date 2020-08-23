@@ -105,8 +105,9 @@ class StockNews(CreateView, LoginRequiredMixin):
 @login_required
 @require_POST
 def delete_stock(request, pk):
-    title = Article.objects.values_list('title', flat=True).get(pk=pk)
-    for stock in Article.objects.filter(title=title).filter(user=request.user):
-        stock.delete()
-    # stock.delete()
+    # title = Article.objects.values_list('title', flat=True).get(pk=pk)
+    # for stock in Article.objects.filter(title=title).filter(user=request.user):
+    #     stock.delete()
+    stock = get_object_or_404(Article, pk=pk)
+    stock.delete()
     return redirect('newslistapp:mypage')
