@@ -31,7 +31,8 @@ def index(request):
     urls = [
         'https://r25.jp/latest',
         'https://ai-trend.jp/',
-        'https://markezine.jp/'
+        'https://markezine.jp/',
+        'https://prtimes.jp/'
     ]
 
     results = []
@@ -44,7 +45,7 @@ def index(request):
     elems = soup.find_all(href=re.compile("/article/"))
 
     news_list = []
-    for elem in elems:
+    for elem in elems[:5]:
         target = '新R25'
         icon = icons['news']
         title = elem.h3.text
@@ -58,7 +59,7 @@ def index(request):
     soup2 = BeautifulSoup(results[1].text, "html.parser")
     elems2 = soup2.find_all(class_='article__content')
 
-    for elem in elems2:
+    for elem in elems2[:5]:
         target = 'AVILEN AI Trend'
         icon = icons['programing']
         title = elem.h3.text.strip()
@@ -71,7 +72,7 @@ def index(request):
     soup3 = BeautifulSoup(results[2].text, "html.parser")
     elems3 = soup3.find_all(class_='new')
 
-    for elem in elems3:
+    for elem in elems3[:5]:
         target = 'MarkeZine'
         icon = icons['marketing']
         title = elem.a.text.strip()
@@ -80,6 +81,19 @@ def index(request):
         year_n = dt.now().year
         date = str(year_n) + date.strftime('%m%d')
         date = dt.strptime(date, '%Y%m%d').date()
+        path = elem.a.attrs["href"]
+        url = "https://markezine.jp/" + path
+        news_list.append([target, icon, title, date, url])
+
+    # PR TIMES
+    soup4 = BeautifulSoup(results[3].text, "html.parser")
+    elems4 = soup4.find_all(class_='list-article')
+
+    for elem in elems4[:5]:
+        target = 'PR TIMES'
+        icon = icons['marketing']
+        title = elem.h3.text.strip()
+        date = dt.now().date()
         path = elem.a.attrs["href"]
         url = "https://markezine.jp/" + path
         news_list.append([target, icon, title, date, url])
