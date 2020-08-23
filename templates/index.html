@@ -7,7 +7,19 @@
 <ul class="list-unstyled">
   {% for target, icon, title, date, url in news_list %}
   <li class="media border-bottom border-gray pt-3 pb-1">
-    <svg class="bd-placeholder-img mr-3" width="64" height="64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 64x64"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">{{ icon }}</text></svg>
+    {% if icon == 'm' %}
+      <div>
+        <i class="fas fa-briefcase p-2 h2 rounded text-secondary" style='background-color:lightgoldenrodyellow;'></i>
+      </div>
+    {% elif icon == 'n' %}
+    <div>
+      <i class="fas fa-newspaper p-2 h2 rounded text-secondary" style='background-color:lightgrey;'></i>
+    </div>
+    {% elif icon == 'p' %}
+    <div>
+      <i class="fas fa-laptop-code p-2 h2 rounded text-secondary" style='background-color:lightcyan;'></i>
+    </div>
+    {% endif %}
     <div class="media-body pl-3">
       <a href="{{ url }}" class="">
         <h6 class="mt-0 mb-0 text-body">{{ title|truncatewords_html:10 }}</h5>

@@ -20,6 +20,11 @@ from datetime import datetime as dt
 def index(request):
     articles = Article.objects.all()
     
+    icons = {
+        'programing': 'p',
+        'marketing': 'm',
+        'entertainment': 'e',
+        'news': 'n'}
     targets = ['新R25', 'AVILEN AI Trend']
     urls = {
         targets[0]: 'https://r25.jp/latest',
@@ -35,7 +40,7 @@ def index(request):
     news_list = []
     for elem in elems:
         target = '新R25'
-        icon ='新'
+        icon = icons['news']
         title = elem.h3.text
         date = elem.time.text.strip()
         date = dt.strptime(date, '%Y.%m.%d').date()
@@ -51,7 +56,7 @@ def index(request):
 
     for elem in elems2:
         target = 'AVILEN AI Trend'
-        icon = 'A'
+        icon = icons['programing']
         title = elem.h3.text.strip()
         date = elem.p.string
         date = dt.strptime(date, '%Y.%m.%d %a').date()
@@ -66,7 +71,7 @@ def index(request):
 
     for elem in elems3:
         target = 'MarkeZine'
-        icon = 'M'
+        icon = icons['marketing']
         title = elem.a.text.strip()
         date = elem.a.text.strip()
         date = dt.strptime(date[-7:], '（%m/%d）')
