@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'favicon.ico' %}">
+
     {% block customcss %}
     {% endblock customcss %}
     
@@ -20,7 +23,6 @@
     <nav class="navbar navbar-dark bg-dark sticky-top">
       <div class="container">
         <a class="navbar-brand" href="{% url 'newslistapp:index' %}">
-          {% load static %}
           <img src="{% static 'logo.png' %}" width="160px" height="32px" class="d-inline-block align-top img-fluid" alt="ScrapeNews">
         </a>
         <ul class='navbar-nav list-group-horizontal ml-auto pr-3'>
