@@ -87,13 +87,13 @@ def index(request):
 
 @login_required
 def mypage(request):
-    articles = Article.objects.filter(user=request.user).order_by('-created_at')
+    articles = Article.objects.filter(user=request.user).order_by('title', '-created_at').distinct('title')
     return render(request, 'mypage.html', {'articles': articles})
 
 class StockNews(CreateView, LoginRequiredMixin):
     template_name = 'index.html'
     model = Article
-    fields = ('user', 'title', 'name', 'url')
+    fields = ('user', 'title', 'name', 'url', 'icon')
     success_url = reverse_lazy('newslistapp:index')
     def form_valid(self, form):
         messages.success(self.request, "記事を保存しました")

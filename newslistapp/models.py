@@ -5,7 +5,7 @@ from users.models import User
 # from users.models import *
 
 class Article(models.Model):
-    created_at = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     title = models.CharField(
         max_length=100, 
         error_messages={
