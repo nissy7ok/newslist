@@ -19,7 +19,7 @@ class Article(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['name', 'user'], name='unique_booking'),
+            models.UniqueConstraint(fields=['title', 'user'], name='unique_booking'),
         ]
 
     def __str__(self):
