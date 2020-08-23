@@ -7,15 +7,15 @@
 <ul class="list-unstyled">
   {% for article in articles %}
   <li class="media border-bottom border-gray pt-3 pb-1">
-    {% if icon == 'm' %}
+    {% if article.icon == 'm' %}
     <div>
       <i class="fas fa-briefcase p-2 h2 rounded text-secondary" style='background-color:lightgoldenrodyellow;'></i>
     </div>
-    {% elif icon == 'n' %}
+    {% elif article.icon == 'n' %}
     <div>
       <i class="fas fa-newspaper p-2 h2 rounded text-secondary" style='background-color:lightgrey;'></i>
     </div>
-    {% elif icon == 'p' %}
+    {% elif article.icon == 'p' %}
     <div>
       <i class="fas fa-laptop-code p-2 h2 rounded text-secondary" style='background-color:lightcyan;'></i>
     </div>
