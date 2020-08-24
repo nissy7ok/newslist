@@ -36,9 +36,9 @@
       -->
 
       {% if user.is_authenticated %}
-        <form action="stock/" method="post">{% csrf_token %}
+        <form action="{% url 'newslistapp:stock' %}" method="post">{% csrf_token %}
           <input type="hidden" name="user" value="{{ user.id }}">
-          <input type="hidden" name="title" value="{{ title }}">
+          <input type="hidden" id="title" name="title" value="{{ title }}">
           <input type="hidden" name="name" value="{{ target }}">
           <input type="hidden" name="url" value="{{ url }}">
           <input type="hidden" name="icon" value="{{ icon }}">
@@ -48,6 +48,38 @@
     </div>
   </li>
   {% endfor %}
+        
 </ul>
+
+        <script>
+          $("form").submit( function(event) {
+            event.preventDefault();
+            let form = $(this);
+            $('#resultPOST').text('通信中...');
+            // Ajax通信を開始
+            $.ajax({
+              url: form.prop("action"),
+              method: form.prop("method"),
+              data: form.serialize(),
+              timeout: 5000,
+              dataType: "text",
+              // success: function(res) {
+                //   if (res.is_success) {  // 入力エラーがなかった場合
+                  //     alert('THANKS!!');
+                  //   } else {
+                    //     alert('FAILED!!')
+                    //   }
+                    // }
+                  })
+            .done( function(data) {
+              // 通信成功時の処理を記述
+              $('#resultPOST').text('記事を保存しました');
+            })
+            .fail(function() {
+              // 通信失敗時の処理を記述
+              $('#resultPOST').text('記事の保存に失敗しました');
+            });
+          });
+        </script>
 
 {% endblock content %}
