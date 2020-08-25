@@ -23,8 +23,8 @@
   <body>
     
     <!-- ヘッダー -->
-    <nav class="navbar navbar-dark bg-dark sticky-top">
-      <div class="container">
+    <nav class="navbar navbar-dark bg-dark sticky-top p-0">
+      <div class="container py-1">
         <a class="navbar-brand" href="{% url 'newslistapp:index' %}">
           <img src="{% static 'logo.png' %}" width="160px" height="32px" class="d-inline-block align-top img-fluid" alt="ScrapeNews">
         </a>
@@ -44,15 +44,17 @@
           <a href="{% url 'newslistapp:mypage' %}"><button class="btn btn-outline-info my-sm-0" type="submit">MyPage</button></a>
         {% else %}
           <a href="{% url 'users:signup' %}"><button class="btn btn-outline-info my-sm-0" type="submit">Signup</button></a>
-        {% endif %}
-      </div>
-    </nav>
-    
-    <!-- メイン -->
-    <div class="bg-light">
-      <div class="container">
-        <div class='pt-3'>
-          <div id="resultPOST"></div>
+          {% endif %}
+        </div>
+        <div class="container-fluid justify-content-center bg-info" id="s_alert">
+          <div id="resultPOST" class="text-light"></div>
+        </div>
+      </nav>
+      
+      <!-- メイン -->
+      <div class="bg-light">
+        <div class="container">
+        <!-- <div class='pt-3'>
           {% if messages %}
             {% for message in messages %}
                 <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %} alert-dismissible fade show small position-absolute w-50 top-1" style="left:50%; transform: translate(-50%, 0%)" role="alert">{{ message }}
@@ -62,7 +64,7 @@
                 </div>
             {% endfor %}
           {% endif %}
-        </div>
+        </div> -->
         {% block content %}
           
         {% endblock content %}
