@@ -10,6 +10,8 @@ from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.models import User
 from .models import Article
+# import logging
+from django.http.response import JsonResponse
 
 # スクレイピング関係
 import re
@@ -18,6 +20,8 @@ from bs4 import BeautifulSoup
 from datetime import datetime as dt
 from concurrent.futures import ThreadPoolExecutor
 from functools import partial
+
+# logger = logging.getLogger('development')
 
 def index(request):
     articles = Article.objects.all()
@@ -111,12 +115,12 @@ class StockNews(CreateView, LoginRequiredMixin):
     model = Article
     fields = ('user', 'title', 'name', 'url', 'icon')
     success_url = reverse_lazy('newslistapp:index')
-    def form_valid(self, form):
-        messages.success(self.request, "記事を保存しました")
-        return super().form_valid(form)
-    def form_invalid(self, form):
-        messages.warning(self.request, "記事は既に保存されています")
-        return redirect('newslistapp:index')
+    # def form_valid(self, form):
+    #     messages.success(self.request, "記事を保存しました")
+    #     return super().form_valid(form)
+    # def form_invalid(self, form):
+    #     messages.warning(self.request, "記事は既に保存されています")
+    #     return redirect('newslistapp:index')
 
 @login_required
 @require_POST
@@ -127,3 +131,16 @@ def delete_stock(request, pk):
     stock = get_object_or_404(Article, pk=pk)
     stock.delete()
     return redirect('newslistapp:mypage')
+
+# Ajax処理
+def exec_ajax(request):
+    if request.method == 'POST':  # POSTの処理
+        data1 = request.POST.get("user")  # POSTで渡された値
+        data2 = request.POST.get("title")  # POSTで渡された値
+        data3 = request.POST.get("name")  # POSTで渡された値
+        data4 = request.POST.get("url")  # POSTで渡された値
+        data5 = request.POST.get("icon")  # POSTで渡された値
+        # article = Article(user = data1, title = data2, url = data3, name = data4, icon = data5, created_at = dt.now)
+        # article.save()
+        # logger.debug(data1 + data2 + data3 + data4 + data5)
+        return HttpResponse(data2)
