@@ -53,7 +53,7 @@
           {% if title in title_list %}
             <input type="submit" value="stock" class="float-right btn btn-secondary btn-sm" role="button" style='cursor: default;' disabled>
           {% else %}
-            <input type="submit" value="stock" class="float-right btn btn-secondary btn-sm" role="button">
+            <input type="submit" id="button{{ forloop.counter }}" value="stock" class="float-right btn btn-secondary btn-sm" role="button">
           {% endif %}
         </form>
         

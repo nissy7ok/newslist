@@ -11,7 +11,7 @@ from ..models import Article
 # logger = logging.getLogger('development')
 
 def index(request):
-    title_list = Article.objects.values_list('title', flat=True)
+    title_list = Article.objects.filter(user=request.user).values_list('title', flat=True)
     title_list = list(title_list)
     # アイコンを分類
     icons = {
