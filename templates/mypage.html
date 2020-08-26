@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class='vh-100'>
+
 <h3 class='border-bottom border-gray pt-5 pb-2'>保存したニュース一覧</h3>
 
 <ul class="list-unstyled">
@@ -13,11 +13,15 @@
     </div>
     {% elif article.icon == 'n' %}
     <div>
-      <i class="fas fa-newspaper p-2 h2 rounded text-secondary" style='background-color:lightgrey;'></i>
+      <i class="far fa-newspaper p-2 h2 rounded text-secondary border" style='background-color:lavender;'></i>
     </div>
     {% elif article.icon == 'p' %}
     <div>
       <i class="fas fa-laptop-code p-2 h2 rounded text-secondary" style='background-color:lightcyan;'></i>
+    </div>
+    {% elif article.icon == 'i' %}
+    <div>
+      <i class="fas fa-chalkboard-teacher p-2 h2 rounded text-secondary border" style='background-color:lavenderblush;'></i>
     </div>
   {% endif %}
     <div class="media-body pl-3">
