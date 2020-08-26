@@ -1,6 +1,7 @@
 from django.urls import path, include
 from . import views
-from .views import index, mypage, StockNews, delete_stock, exec_ajax
+from .views.views import mypage, StockNews, delete_stock, exec_ajax
+from .views.index import index
 
 app_name='newslistapp'
 urlpatterns = [
