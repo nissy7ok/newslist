@@ -6,7 +6,11 @@
 
 <ul class="list-unstyled">
   {% for target, icon, title, date, url in news_list %}
-  <li class="media border-bottom border-gray pt-3 pb-1">
+    {% if forloop.counter0|divisibleby:"2" %}
+      <li class="media border-bottom border-gray pt-3 pb-1 px-1">
+    {% else %}
+      <li class="media border-bottom border-gray pt-3 pb-1 px-1 bg-white">
+    {% endif %}
     {% if icon == 'm' %}
       <div>
         <i class="fas fa-chart-bar p-2 h2 rounded text-secondary border" style='background-color:lightgoldenrodyellow;'></i>
