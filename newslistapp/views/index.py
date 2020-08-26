@@ -7,6 +7,8 @@ from datetime import datetime as dt
 from concurrent.futures import ThreadPoolExecutor
 from functools import partial
 
+# logger = logging.getLogger('development')
+
 def index(request):
     # アイコンを分類
     icons = {
