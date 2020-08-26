@@ -88,7 +88,8 @@ def index(request):
         target = 'PR TIMES'
         icon = icons['marketing']
         title = elem.h3.text.strip()
-        date = dt.now().date()
+        date = elem.time.attrs["datetime"]
+        date = dt.strptime(date[:19], '%Y-%m-%dT%H:%M:%S').date()
         path = elem.a.attrs["href"]
         url = "https://markezine.jp/" + path
         news_list.append([target, icon, title, date, url])
