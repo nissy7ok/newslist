@@ -6,10 +6,13 @@ from bs4 import BeautifulSoup
 from datetime import datetime as dt
 from concurrent.futures import ThreadPoolExecutor
 from functools import partial
+from ..models import Article
 
 # logger = logging.getLogger('development')
 
 def index(request):
+    title_list = Article.objects.values_list('title', flat=True)
+    title_list = list(title_list)
     # アイコンを分類
     icons = {
         'programing': 'p',
@@ -95,4 +98,4 @@ def index(request):
         news_list.append([target, icon, title, date, url])
 
     news_list = sorted(news_list, key=lambda x: x[3], reverse=True)
-    return render(request, 'index.html', {'news_list': news_list})
+    return render(request, 'index.html', {'news_list': news_list, 'title_list': title_list})
