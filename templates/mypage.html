@@ -42,7 +42,7 @@
       </div>
       -->
       <form action="{% url 'newslistapp:delete_stock' pk=article.pk %}" method="post">{% csrf_token %}
-        <button type="submit" class="float-right btn btn-secondary btn-sm" onclick='return confirm("本当に削除しますか？");'>delete</button>
+        <button type="submit" class="float-right btn btn-secondary btn-sm fas fa-trash-alt" onclick='return confirm("本当に削除しますか？");'> delete</button>
       </form>
     </div>
   </li>

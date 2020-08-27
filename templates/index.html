@@ -35,13 +35,6 @@
           <span class="mb-0 small text-secondary pl-2 pr-2">{{ date }}</span>
         <span class="mb-0 small text-secondary">{{ url|truncatechars_html:50 }}</span>
       </a>
-        <!-- <p class="mb-0 text-body">{{ article.content|truncatewords_html:100 }}</p>
-      <div class="btn-group-toggle float-right" data-toggle="buttons">
-        <label class="btn btn-secondary btn-sm">
-          <input type="checkbox" checked autocomplete="off">STOCK
-        </label>
-      </div>
-      -->
 
       {% if user.is_authenticated %}
         <form action="{% url 'newslistapp:stock' %}" method="post">{% csrf_token %}
@@ -103,13 +96,6 @@
               data: form.serialize(),
               timeout: 5000,
               dataType: "text",
-              // success: function(res) {
-                //   if (res.is_success) {  // 入力エラーがなかった場合
-                  //     alert('THANKS!!');
-                  //   } else {
-                    //     alert('FAILED!!')
-                    //   }
-                    // }
                   })
             .done( function(data) {
               // 通信成功時の処理を記述
