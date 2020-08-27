@@ -27,7 +27,8 @@ def index(request):
         'https://r25.jp/latest',
         'https://ai-trend.jp/',
         'https://markezine.jp/news_pickup/',
-        'https://prtimes.jp/'
+        'https://prtimes.jp/',
+        'https://ainow.ai/category/ainoweditor/'
     ]
 
     # マルチスレッド処理
@@ -92,6 +93,20 @@ def index(request):
         date = dt.strptime(date[:19], '%Y-%m-%dT%H:%M:%S').date()
         path = elem.a.attrs["href"]
         url = "https://prtimes.jp/" + path
+        news_list.append([target, icon, title, date, url])
+
+
+    # AINOW
+    soup5 = BeautifulSoup(results[4].text, "html.parser")
+    elems5 = soup5.find_all(class_='article')
+
+    for elem in elems5[:5]:
+        target = 'AINOW'
+        icon = icons['programing']
+        title = elem.h2.text.strip()
+        date = elem.find('span', attrs={'class': 'article_date'}).text
+        date = dt.strptime(date, '%Y.%m.%d').date()
+        url = elem.find('a', class_='article_link').attrs["href"]
         news_list.append([target, icon, title, date, url])
 
     news_list = sorted(news_list, key=lambda x: x[3], reverse=True)
