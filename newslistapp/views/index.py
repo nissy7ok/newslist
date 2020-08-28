@@ -8,8 +8,6 @@ from concurrent.futures import ThreadPoolExecutor
 from functools import partial
 from ..models import Article
 
-# logger = logging.getLogger('development')
-
 def index(request):
     title_list = Article.objects.filter(user=request.user).values_list('title', flat=True)
     title_list = list(title_list)
