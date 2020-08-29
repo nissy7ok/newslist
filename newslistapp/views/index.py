@@ -9,6 +9,8 @@ from functools import partial
 from ..models import Article
 
 def index(request):
+    """スクレイピングを実行し、リストへ格納する
+    """
     title_list = Article.objects.filter(user=request.user).values_list('title', flat=True)
     title_list = list(title_list)
     # アイコンを分類

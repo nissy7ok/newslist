@@ -15,10 +15,14 @@ from django.http.response import JsonResponse
 
 @login_required
 def mypage(request):
+    """マイページへ一覧表示するためのリストを作成
+    """
     articles = Article.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'mypage.html', {'articles': articles})
 
 class StockNews(CreateView, LoginRequiredMixin):
+    """ニュースをマイページへ保存するためのメソッド
+    """
     template_name = 'index.html'
     model = Article
     fields = ('user', 'title', 'name', 'url', 'icon')
@@ -27,6 +31,8 @@ class StockNews(CreateView, LoginRequiredMixin):
 @login_required
 @require_POST
 def delete_stock(request, pk):
+    """マイページに保存した記事を削除するためのメソッド
+    """
     stock = get_object_or_404(Article, pk=pk)
     stock.delete()
     return redirect('newslistapp:mypage')
