@@ -1,1 +1,1 @@
-web: gunicorn newlist.wsgi --log-file -
+web: gunicorn newslist.wsgi --log-file -
