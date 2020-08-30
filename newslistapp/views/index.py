@@ -8,6 +8,9 @@ from concurrent.futures import ThreadPoolExecutor
 from functools import partial
 from ..models import Article
 
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def index(request):
     """スクレイピングを実行し、リストへ格納する
     """

@@ -142,3 +142,5 @@ MEDIA_URL = '/media/'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+LOGIN_URL = 'login'
