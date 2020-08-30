@@ -88,7 +88,7 @@ DATABASES = {
         'HOST': '',
         'PORT': '',
         'TEST': {
-            'NAME': 'test_database_name',
+            'NAME': 'test_db',
         }
     }
 }
