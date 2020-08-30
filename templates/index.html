@@ -5,25 +5,107 @@
 <h3 class='border-bottom border-gray pt-5 pb-2'>ニュース一覧</h3>
 
 <ul class="list-unstyled">
-  {% for title, date, url in news_list %}
-  <li class="media border-bottom border-gray pt-3 pb-1">
-    <img src="{{ favicon }}"  class="img-thumbnail">
+  {% for target, icon, title, date, url in news_list %}
+    {% if forloop.counter0|divisibleby:"2" %}
+      <li class="media border-bottom border-gray pt-3 pb-1 px-1">
+    {% else %}
+      <li class="media border-bottom border-gray pt-3 pb-1 px-1 bg-white">
+    {% endif %}
+    {% if icon == 'm' %}
+      <div>
+        <i class="fas fa-chart-bar p-2 h2 rounded text-secondary border" style='background-color:lightgoldenrodyellow;'></i>
+      </div>
+    {% elif icon == 'n' %}
+    <div>
+      <i class="far fa-newspaper p-2 h2 rounded text-secondary border" style='background-color:lavender;'></i>
+    </div>
+    {% elif icon == 'p' %}
+    <div>
+      <i class="fas fa-laptop-code p-2 h2 rounded text-secondary border" style='background-color:lightcyan;'></i>
+    </div>
+    {% elif icon == 'i' %}
+    <div>
+      <i class="fas fa-chalkboard-teacher p-2 h2 rounded text-secondary border" style='background-color:lavenderblush;'></i>
+    </div>
+    {% endif %}
     <div class="media-body pl-3">
-      <a href="#" class="">
+      <a href="{{ url }}" class="">
         <h6 class="mt-0 mb-0 text-body">{{ title|truncatewords_html:10 }}</h5>
           <span class="mb-0 small text-secondary">{{ target }}</span>
-          <span class="mb-0 small text-secondary pl-2 pr-5">{{ date }}</span>
-        <span class="mb-0 small text-secondary">{{ url }}</span>
+          <span class="mb-0 small text-secondary pl-2 pr-2">{{ date }}</span>
+        <span class="mb-0 small text-secondary">{{ url|truncatechars_html:50 }}</span>
       </a>
-        <p class="mb-0 text-body">{{ article.content|truncatewords_html:100 }}</p>
-      <div class="btn-group-toggle float-right" data-toggle="buttons">
-        <label class="btn btn-secondary btn-sm">
-          <input type="checkbox" checked autocomplete="off">STOCK
-        </label>
-      </div>
+
+      {% if user.is_authenticated %}
+        <form action="{% url 'newslistapp:stock' %}" method="post">{% csrf_token %}
+          <input type="hidden" name="user" value="{{ user.id }}">
+          <input type="hidden" id="title" name="title" value="{{ title }}">
+          <input type="hidden" name="name" value="{{ target }}">
+          <input type="hidden" name="url" value="{{ url }}">
+          <input type="hidden" name="icon" value="{{ icon }}">
+          {% if title in title_list %}
+            <input type="submit" value="&#xf02e; stock" class="float-right btn btn-secondary btn-sm fas" role="button" style='cursor: default;' disabled>
+          {% else %}
+            <input type="submit" id="button{{ forloop.counter }}" value="&#xf02e; stock" class="float-right btn btn-secondary btn-sm fas" role="button">
+          {% endif %}
+        </form>
+        
+        <script>
+          $("form").submit( function(event) {
+            event.preventDefault();
+            let form = $(this);
+            $('#resultPOST').text('通信中...');
+            // Ajax通信を開始
+            $.ajax({
+              url: form.prop("action"),
+              method: form.prop("method"),
+              data: form.serialize(),
+              timeout: 5000,
+              dataType: "text",
+            })
+            .done( function(data) {
+              // 通信成功時の処理を記述
+              let element = document.getElementById("s_alert");
+              element.classList.replace('bg-danger', 'bg-info');
+              $('#resultPOST').text('記事を保存しました');
+            })
+            .fail(function() {
+              // 通信失敗時の処理を記述
+              let element = $("s_alert");
+              element.classList.replace('bg-info', 'bg-danger');
+              $('#resultPOST').text('記事の保存に失敗しました');
+            });
+          });
+        </script>
+      {% endif %}
     </div>
   </li>
   {% endfor %}
+        
 </ul>
+
+        <script>
+          $("form").submit( function(event) {
+            event.preventDefault();
+            let form = $(this);
+            $('#resultPOST').text('通信中...');
+            // Ajax通信を開始
+            $.ajax({
+              url: form.prop("action"),
+              method: form.prop("method"),
+              data: form.serialize(),
+              timeout: 5000,
+              dataType: "text",
+                  })
+            .done( function(data) {
+              // 通信成功時の処理を記述
+              $('#resultPOST').text('記事を保存しました');
+            })
+            .fail(function() {
+              // 通信失敗時の処理を記述
+              $('#resultPOST').text('記事の保存に失敗しました');
+            });
+          });
+        </script>
 
 {% endblock content %}

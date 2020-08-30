@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'fontawesome_5'
 ]
 
 MIDDLEWARE = [
@@ -73,18 +74,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'newslist.wsgi.application'
 
+LOGIN_REDIRECT_URL = '/'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'newslist_development',
-        'USER': 'root',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'newslistapp_development',
+        'USER': 'nishimuranaoki',
         'PASSWORD': '',
         'HOST': '',
         'PORT': '',
+        'TEST': {
+            'NAME': 'test_database_name',
+        }
     }
 }
 
@@ -126,3 +131,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
