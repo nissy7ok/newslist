@@ -95,7 +95,7 @@ def index(request):
         date = elem.time.attrs["datetime"]
         date = dt.strptime(date[:19], '%Y-%m-%dT%H:%M:%S').date()
         path = elem.a.attrs["href"]
-        url = "https://prtimes.jp/" + path
+        url = "https://prtimes.jp" + path
         news_list.append([target, icon, title, date, url])
 
 
