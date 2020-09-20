@@ -80,7 +80,7 @@ def index(request):
         date = elem.find('span', class_='day').text
         date = dt.strptime(date, '%Y/%m/%d').date()
         path = elem.a.attrs["href"]
-        url = "https://markezine.jp/" + path
+        url = "https://markezine.jp" + path
         news_list.append([target, icon, title, date, url])
 
 
