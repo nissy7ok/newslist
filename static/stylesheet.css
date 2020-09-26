@@ -1,0 +1,23 @@
+
+.fa-border {
+  width:64px;
+  height:64px;
+  text-align:center;
+  line-height:40px;
+}
+
+.marketing {
+  background-color:lightgoldenrodyellow;
+}
+
+.news {
+  background-color:lavender;
+}
+
+.programing {
+  background-color:lightcyan;
+}
+
+.improvement {
+  background-color:lavenderblush;
+}
