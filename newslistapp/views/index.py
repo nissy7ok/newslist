@@ -29,7 +29,7 @@ def index(request):
     urls = [
         'https://r25.jp/latest',
         'https://ai-trend.jp/',
-        'https://markezine.jp/news_pickup/',
+        'https://markezine.jp/',
         'https://prtimes.jp/',
         'https://ainow.ai/category/ainoweditor/'
     ]
@@ -71,14 +71,14 @@ def index(request):
 
     # MarkeZine
     soup3 = BeautifulSoup(results[2].text, "html.parser")
-    elems3 = soup3.find_all(class_='boxWrap')
+    elems3 = soup3.find_all(class_='c-linklist_item')
 
     for elem in elems3[:5]:
         target = 'MarkeZine'
         icon = icons['marketing']
-        title = elem.a.text.strip()
-        date = elem.find('span', class_='day').text
-        date = dt.strptime(date, '%Y/%m/%d').date()
+        title = elem.a.text.strip()[:-7]
+        date = elem.find('time').get('datetime')
+        date = dt.strptime(date, '%Y-%m-%d').date()
         path = elem.a.attrs["href"]
         url = "https://markezine.jp" + path
         news_list.append([target, icon, title, date, url])
